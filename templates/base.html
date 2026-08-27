@@ -1,0 +1,517 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{{ APP_NAME }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'dist/output.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="min-h-screen bg-app-background text-slate-800">
+
+<div class="min-h-screen">
+
+    <!-- =====================================================
+         NAVBAR MÓVIL / TABLET
+    ====================================================== -->
+    <header
+        class="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-primary px-4 text-white shadow-sm lg:hidden"
+    >
+
+        <div class="flex min-w-0 items-center gap-3">
+
+            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent">
+                <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 3v18M7 8c0-2.7 2.2-5 5-5s5 2.3 5 5c0 4-5 6-5 6s-5-2-5-6Z"
+                    />
+                </svg>
+            </div>
+
+            <span class="truncate text-sm font-semibold sm:text-base">
+                {{ APP_NAME }}
+            </span>
+
+        </div>
+
+
+        <button
+            id="menu-open"
+            type="button"
+            aria-label="Abrir menú"
+            class="cursor-pointer rounded-xl p-2 transition hover:bg-white/10 active:bg-white/20"
+        >
+            <svg
+                class="h-7 w-7"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         OVERLAY MÓVIL
+    ====================================================== -->
+    <div
+        id="sidebar-overlay"
+        class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-[2px] lg:hidden"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+    <aside
+        id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 flex w-72 -translate-x-full flex-col bg-primary text-white shadow-2xl transition-transform duration-300 ease-out lg:w-64 lg:translate-x-0 lg:shadow-none"
+    >
+
+        <!-- LOGO -->
+        <div class="flex h-16 items-center justify-between border-b border-white/10 px-4">
+
+            <div class="flex min-w-0 items-center gap-3">
+
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent shadow-lg shadow-black/20">
+                    <svg
+                        class="h-6 w-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 3v18M7 8c0-2.7 2.2-5 5-5s5 2.3 5 5c0 4-5 6-5 6s-5-2-5-6Z"
+                        />
+                    </svg>
+                </div>
+
+
+                <div class="min-w-0">
+
+                    <p class="truncate text-sm font-semibold">
+                        {{ APP_NAME }}
+                    </p>
+
+                    <p class="text-xs text-white/50">
+                        ITVER
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="menu-close"
+                type="button"
+                aria-label="Cerrar menú"
+                class="cursor-pointer rounded-xl p-2 text-white/70 transition hover:bg-white/10 hover:text-white lg:hidden"
+            >
+                <svg
+                    class="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>
+                </svg>
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             NAVEGACIÓN PRINCIPAL
+        ================================================== -->
+        <nav class="flex-1 overflow-y-auto px-3 py-5">
+
+            <div class="space-y-1">
+
+                <!-- DASHBOARD -->
+                <a
+                    href="{% url 'core:dashboard' %}"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'dashboard' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <!-- LUCIDE: layout-dashboard -->
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect width="7" height="9" x="3" y="3" rx="1"/>
+                        <rect width="7" height="5" x="14" y="3" rx="1"/>
+                        <rect width="7" height="9" x="14" y="12" rx="1"/>
+                        <rect width="7" height="5" x="3" y="16" rx="1"/>
+                    </svg>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+
+                <!-- REGISTRO DE ANÁLISIS -->
+                <a
+                    href="#"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'analysis' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <!-- LUCIDE: trees -->
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/>
+                        <path d="M7 16v6"/>
+                        <path d="M13 19v3"/>
+                        <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/>
+                    </svg>
+
+                    <span>Registro de análisis</span>
+
+                </a>
+
+
+                <!-- HISTORIAL -->
+                <a
+                    href="#"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'history' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M3 12a9 9 0 1 0 3-6.7"/>
+                        <path d="M3 3v6h6"/>
+                        <path d="M12 7v5l3 2"/>
+                    </svg>
+
+                    <span>Historial</span>
+
+                </a>
+
+
+                <!-- REPORTES -->
+                <a
+                    href="#"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'reports' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <!-- LUCIDE: chart-bar -->
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+                        <path d="M7 16h8"/>
+                        <path d="M7 11h12"/>
+                        <path d="M7 6h3"/>
+                    </svg>
+
+                    <span>Reportes</span>
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 SISTEMA
+            ================================================== -->
+            <p class="mb-2 mt-7 px-4 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                Sistema
+            </p>
+
+
+            <div class="space-y-1">
+
+                <!-- REGISTRO DE ACTIVIDAD -->
+                <a
+                    href="#"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'activity' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <!-- LUCIDE: book-marked -->
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M10 2v8l3-3 3 3V2"/>
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>
+                    </svg>
+
+                    <span>Registro de actividad</span>
+
+                </a>
+
+
+                <!-- ALERTAS Y NOTIFICACIONES -->
+                <a
+                    href="#"
+                    class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                    {% if active_nav == 'alerts' %}
+                        bg-accent text-white shadow-sm
+                    {% else %}
+                        text-white/70 hover:bg-white/10 hover:text-white
+                    {% endif %}"
+                >
+
+                    <!-- LUCIDE: bell-dot -->
+                    <svg
+                        class="h-5 w-5 shrink-0"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
+                        <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348"/>
+                        <circle cx="18" cy="5" r="3"/>
+                    </svg>
+
+                    <span class="flex-1">
+                        Alertas y notificaciones
+                    </span>
+
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- =================================================
+             USUARIO / CONFIGURACIÓN
+        ================================================== -->
+        <div class="border-t border-white/10 p-3">
+
+            {% if request.user.is_authenticated %}
+
+                <!-- USUARIO -->
+                <div class="mb-2 flex items-center gap-3 rounded-xl bg-white/5 px-3 py-3">
+
+                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-white">
+                        {{ request.user.email|first|upper }}
+                    </div>
+
+
+                    <div class="min-w-0">
+
+                        {% if request.user.first_name %}
+
+                            <p class="truncate text-sm font-medium text-white">
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            </p>
+
+                        {% else %}
+
+                            <p class="truncate text-sm font-medium text-white">
+                                Cuenta
+                            </p>
+
+                        {% endif %}
+
+
+                        <p class="truncate text-xs text-white/45">
+                            {{ request.user.email }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- CONFIGURACIÓN -->
+            <a
+                href="{% url 'accounts:settings' %}"
+                class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition
+                {% if active_nav == 'settings' %}
+                    bg-accent text-white shadow-sm
+                {% else %}
+                    text-white/70 hover:bg-white/10 hover:text-white
+                {% endif %}"
+            >
+
+                <!-- LUCIDE: cog -->
+                <svg
+                    class="h-5 w-5 shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M11 10.27 7 3.34"/>
+                    <path d="m11 13.73-4 6.93"/>
+                    <path d="M12 22v-2"/>
+                    <path d="M12 2v2"/>
+                    <path d="M14 12h8"/>
+                    <path d="m17 20.66-1-1.73"/>
+                    <path d="m17 3.34-1 1.73"/>
+                    <path d="M2 12h2"/>
+                    <path d="m20.66 17-1.73-1"/>
+                    <path d="m20.66 7-1.73 1"/>
+                    <path d="m3.34 17 1.73-1"/>
+                    <path d="m3.34 7 1.73 1"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="12" r="8"/>
+                </svg>
+
+                <span>Configuración</span>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+            {% if request.user.is_authenticated %}
+
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="mt-1 flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-white/70 transition hover:bg-red-500/10 hover:text-red-300"
+                    >
+
+                        <svg
+                            class="h-5 w-5 shrink-0"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M10 17l5-5-5-5"/>
+                            <path d="M15 12H3"/>
+                            <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
+                        </svg>
+
+                        <span>Cerrar sesión</span>
+
+                    </button>
+
+                </form>
+
+            {% endif %}
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+    <main class="min-h-screen pt-16 lg:ml-64 lg:pt-0">
+
+        <div class="mx-auto w-full max-w-[1600px] p-4 sm:p-6 lg:p-8">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     JS
+====================================================== -->
+{% include "components/toasts.html" %}
+
+<script src="{% static 'js/sidebar.js' %}"></script>
+<script src="{% static 'js/toast.js' %}"></script>
+
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

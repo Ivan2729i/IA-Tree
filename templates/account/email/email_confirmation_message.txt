@@ -1,0 +1,11 @@
+Hola:
+
+Gracias por crear una cuenta en {{ current_site.name }}.
+
+Para verificar tu correo electrónico, abre el siguiente enlace:
+
+{{ activate_url }}
+
+Si no creaste esta cuenta, puedes ignorar este mensaje.
+
+Este enlace expirará después del periodo de verificación establecido.

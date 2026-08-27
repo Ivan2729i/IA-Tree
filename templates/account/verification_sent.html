@@ -1,0 +1,69 @@
+{% extends "auth/base_auth.html" %}
+
+{% block title %}Verifica tu correo | {{ APP_NAME }}{% endblock %}
+
+{% block auth_content %}
+
+<div class="text-center">
+
+    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/15 bg-accent/10 text-primary">
+
+        <svg class="h-8 w-8"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="m3 7 9 6 9-6"/>
+        </svg>
+
+    </div>
+
+    <h1 class="mt-6 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+        Revisa tu correo
+    </h1>
+
+    <p class="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-500">
+        La cuenta fue creada correctamente. Hemos enviado un enlace de verificación a tu correo electrónico.
+    </p>
+
+    <div class="mt-6 rounded-xl border border-accent/15 bg-accent/10 px-4 py-4 text-left">
+
+        <div class="flex gap-3">
+
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-primary"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 11v5"/>
+                <path d="M12 8h.01"/>
+            </svg>
+
+            <div>
+                <p class="text-sm font-semibold text-primary">
+                    Antes de iniciar sesión
+                </p>
+
+                <p class="mt-1 text-sm leading-6 text-slate-600">
+                    Abre el correo que te enviamos y confirma tu dirección. El enlace de verificación tiene una vigencia limitada.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <a href="{% url 'account_login' %}"
+       class="btn-base btn-primary btn-shine mt-7 w-full">
+        <span>Ir al inicio de sesión</span>
+    </a>
+
+    <p class="mt-5 text-xs leading-5 text-slate-400">
+        Si no encuentras el mensaje, revisa también la carpeta de spam o correo no deseado.
+    </p>
+
+</div>
+
+{% endblock %}

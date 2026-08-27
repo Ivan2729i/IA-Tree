@@ -1,0 +1,13 @@
+Hola:
+
+Recibimos una solicitud para eliminar permanentemente tu cuenta.
+
+Para continuar, abre el siguiente enlace:
+
+{{ delete_url }}
+
+El enlace tiene una vigencia limitada.
+
+Si no solicitaste eliminar tu cuenta, ignora este mensaje. Tu cuenta no sufrirá ningún cambio.
+
+Este es un mensaje automático.

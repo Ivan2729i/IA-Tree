@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmar eliminación | {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+
+<div class="mx-auto max-w-xl">
+
+    <section class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-red-200">
+
+        <div class="border-b border-red-100 bg-red-50 p-5 sm:p-6">
+
+            <div class="flex items-start gap-3">
+
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-danger">
+                    <svg class="h-5 w-5"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         aria-hidden="true">
+                        <path d="M3 6h18"/>
+                        <path d="M8 6V4h8v2"/>
+                        <path d="m19 6-1 14H6L5 6"/>
+                        <path d="M10 11v5"/>
+                        <path d="M14 11v5"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h1 class="text-xl font-bold text-red-700">
+                        Confirmar eliminación de cuenta
+                    </h1>
+
+                    <p class="mt-2 text-sm leading-6 text-red-700/80">
+                        Esta es la última confirmación antes de eliminar permanentemente tu cuenta.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <form method="post" class="space-y-5 p-5 sm:p-6">
+            {% csrf_token %}
+
+            <div>
+                <label for="id_confirmation"
+                       class="mb-2 block text-sm font-medium text-slate-700">
+                    Escribe <span class="font-bold text-danger">ELIMINAR</span> para confirmar
+                </label>
+
+                <input id="id_confirmation"
+                       name="confirmation"
+                       type="text"
+                       autocomplete="off"
+                       placeholder="ELIMINAR"
+                       class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-danger focus:ring-4 focus:ring-red-100">
+
+                {% for error in form.confirmation.errors %}
+                    <p class="mt-1.5 text-xs text-danger">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+
+            <div class="rounded-xl border border-red-100 bg-red-50 px-4 py-3">
+                <div class="flex items-start gap-3">
+
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-danger"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 8v5"/>
+                        <path d="M12 16h.01"/>
+                    </svg>
+
+                    <p class="text-sm leading-6 text-red-700">
+                        Después de confirmar, no podrás recuperar esta cuenta ni los datos que hayan sido eliminados.
+                    </p>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+
+                <a href="{% url 'accounts:settings' %}"
+                   class="btn-base btn-outline btn-shine">
+                    <span>Cancelar</span>
+                </a>
+
+                <button type="submit"
+                        class="btn-base btn-danger btn-shine">
+                    <span>Eliminar mi cuenta</span>
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}

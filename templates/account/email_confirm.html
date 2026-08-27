@@ -1,0 +1,91 @@
+{% extends "auth/base_auth.html" %}
+{% load account %}
+
+{% block title %}Confirmar correo | {{ APP_NAME }}{% endblock %}
+
+{% block auth_content %}
+
+<div class="text-center">
+
+    {% if confirmation %}
+
+        <!-- CONFIRMACIÓN VÁLIDA -->
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/15 bg-accent/10 text-primary">
+
+            <svg class="h-8 w-8"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 aria-hidden="true">
+                <path d="M20 6 9 17l-5-5"/>
+            </svg>
+
+        </div>
+
+
+        <h1 class="mt-6 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+            Confirma tu correo
+        </h1>
+
+
+        <p class="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-500">
+            Confirma que deseas verificar la dirección
+            <strong class="font-semibold text-primary">
+                {{ confirmation.email_address.email }}
+            </strong>.
+        </p>
+
+
+        <form method="post"
+              action="{% url 'account_confirm_email' confirmation.key %}"
+              class="mt-7">
+
+            {% csrf_token %}
+
+            <button type="submit"
+                    class="btn-base btn-primary btn-shine w-full">
+                <span>Verificar correo</span>
+            </button>
+
+        </form>
+
+
+    {% else %}
+
+        <!-- ENLACE INVÁLIDO -->
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-danger/15 bg-danger/10 text-danger">
+
+            <svg class="h-8 w-8"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8"
+                 aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M9 9l6 6M15 9l-6 6"/>
+            </svg>
+
+        </div>
+
+
+        <h1 class="mt-6 text-2xl font-bold tracking-tight text-primary">
+            Enlace no válido
+        </h1>
+
+
+        <p class="mx-auto mt-3 max-w-sm text-sm leading-6 text-slate-500">
+            Este enlace de verificación ya no es válido o ha expirado.
+        </p>
+
+
+        <a href="{% url 'account_login' %}"
+           class="btn-base btn-primary btn-shine mt-7 w-full">
+            <span>Volver al inicio de sesión</span>
+        </a>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

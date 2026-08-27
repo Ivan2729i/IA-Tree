@@ -1,0 +1,62 @@
+# =========================
+# ENVIRONMENT
+# =========================
+.env
+.env.*
+!.env.example
+
+.venv/
+venv/
+
+
+# =========================
+# PYTHON
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# =========================
+# DJANGO
+# =========================
+db.sqlite3
+db.sqlite3-journal
+
+media/
+staticfiles/
+
+
+# =========================
+# NODE / TAILWIND
+# =========================
+node_modules/
+
+# CSS compilado por Tailwind
+static/dist/
+
+
+# =========================
+# LOGS
+# =========================
+*.log
+logs/
+
+
+# =========================
+# IDE
+# =========================
+.idea/
+.vscode/
+
+
+# =========================
+# SISTEMA OPERATIVO
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini

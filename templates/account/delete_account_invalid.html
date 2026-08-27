@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Enlace no válido | {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+
+<div class="mx-auto max-w-xl">
+
+    <section class="rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-border sm:p-8">
+
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-danger/10 text-danger">
+            <svg class="h-7 w-7"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="m9 9 6 6"/>
+                <path d="m15 9-6 6"/>
+            </svg>
+        </div>
+
+        <h1 class="mt-5 text-2xl font-bold tracking-tight text-primary">
+            Enlace no válido
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-500">
+            El enlace de eliminación ha expirado, no es válido o pertenece a otra cuenta.
+        </p>
+
+        <a href="{% url 'accounts:delete_account_request' %}"
+           class="btn-base btn-primary btn-shine mt-6">
+            <span>Solicitar un nuevo enlace</span>
+        </a>
+
+    </section>
+
+</div>
+
+{% endblock %}

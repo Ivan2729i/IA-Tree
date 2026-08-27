@@ -1,0 +1,34 @@
+{
+  "name": "PythonProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync:vendor": "node ./scripts/copy-vendor.mjs",
+    "dev:css": "tailwindcss -i ./static/src/input.css -o ./static/dist/output.css --watch",
+    "dev:django": "python manage.py runserver",
+    "dev": "pnpm sync:vendor && concurrently -n TAILWIND,DJANGO \"pnpm dev:css\" \"pnpm dev:django\"",
+    "build:css": "tailwindcss -i ./static/src/input.css -o ./static/dist/output.css --minify",
+    "build": "pnpm sync:vendor && pnpm build:css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.23.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@11.23.0",
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1"
+  }
+}
