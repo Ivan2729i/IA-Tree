@@ -38,9 +38,12 @@ class DeleteAccountRequestForm(forms.Form):
     def clean_password(self):
         password = self.cleaned_data.get("password")
 
-        if self.user and self.user.has_usable_password():
-            if not password or not self.user.check_password(password):
-                raise forms.ValidationError("La contraseña actual no es correcta.")
+        if (
+            self.user
+            and self.user.has_usable_password()
+            and (not password or not self.user.check_password(password))
+        ):
+            raise forms.ValidationError("La contraseña actual no es correcta.")
 
         return password
 
