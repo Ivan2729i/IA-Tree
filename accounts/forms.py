@@ -52,6 +52,8 @@ class DeleteAccountConfirmForm(forms.Form):
         value = self.cleaned_data["confirmation"].strip()
 
         if value != "ELIMINAR":
-            raise forms.ValidationError('Escribe exactamente "ELIMINAR" para continuar.')
+            raise forms.ValidationError(
+                'Escribe exactamente "ELIMINAR" para continuar.'
+            )
 
         return value

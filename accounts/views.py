@@ -1,3 +1,5 @@
+from allauth.account.models import EmailAddress
+from allauth.socialaccount.models import SocialAccount
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -5,17 +7,17 @@ from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
-from allauth.account.models import EmailAddress
-from allauth.socialaccount.models import SocialAccount
+
 from .forms import (
     AccountProfileForm,
     DeleteAccountConfirmForm,
-    DeleteAccountRequestForm,)
+    DeleteAccountRequestForm,
+)
 from .services.account_deletion_service import AccountDeletionService
 from .services.account_deletion_token import (
     create_delete_account_token,
-    validate_delete_account_token,)
-
+    validate_delete_account_token,
+)
 
 
 @login_required
