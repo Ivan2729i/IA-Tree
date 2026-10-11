@@ -101,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# Internationalization
 LANGUAGE_CODE = "es-mx"
 
 TIME_ZONE = "America/Mexico_City"
@@ -142,7 +141,7 @@ DEFAULT_FROM_EMAIL = os.getenv(
 )
 
 
-APP_NAME = "Sistema de Análisis de Arbolado"
+APP_NAME = "Canonpy"
 
 
 # =========================================================
