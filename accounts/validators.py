@@ -41,4 +41,3 @@ class StrongPasswordValidator:
             "La contraseña debe contener al menos una mayúscula, "
             "un número y un carácter especial."
         )
-

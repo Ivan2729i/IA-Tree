@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core import signing
 
-
 DELETE_ACCOUNT_SALT = "accounts.delete-account"
 
 
@@ -27,4 +26,3 @@ def validate_delete_account_token(token):
         )
     except (signing.BadSignature, signing.SignatureExpired):
         return None
-
