@@ -1,0 +1,10 @@
+[tool.ruff]
+# Excluimos carpetas automáticas
+exclude = [".venv", "migrations", "__pycache__"]
+
+[tool.ruff.lint]
+# Ignoramos reglas que chocan con la estructura por defecto de Django
+ignore = [
+    "RUF012", # Mutable default value in class attribute (común en REQUIRED_FIELDS)
+    "EXE001", # Shebang is present but file is not executable (común en manage.py)
+]
